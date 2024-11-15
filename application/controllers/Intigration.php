@@ -58,7 +58,6 @@ class Intigration extends CI_Controller
 
 
 
-
     public function GetUsers()
     {
 
@@ -85,5 +84,37 @@ class Intigration extends CI_Controller
         return $data;
 
     }
+
+
+
+
+    public function DeleteUser($id)
+    {
+
+        $api_url = 'http://localhost/ApiCreation/Creation//DeleteUserData/' . $id;
+
+        // Initialize cURL
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $api_url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+        // Execute cURL request
+        $response = curl_exec($ch);
+        $response_data = json_decode($response, true);
+
+        // print_r($response_data);die;
+
+        if ($response_data['status'] == 'success') {
+            $this->session->set_flashdata('success', 'User deleted successfully');
+        } else {
+            $this->session->set_flashdata('error', 'User deleted failed');
+        }
+
+        curl_close($ch);
+
+        redirect("Intigration/index");
+
+    }
+
 }
 ?>

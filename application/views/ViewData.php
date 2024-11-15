@@ -36,8 +36,10 @@
                             <td><?php echo $user['email'] ?></td>
                             <td><?php echo $user['contact'] ?></td>
                             <td>
-                                <a href="" class="btn btn-primary">Edit</a>
-                                <a href="" class="btn btn-danger">Delete</a>
+                                <a href="<?php echo base_url('NewApiController/EditUser/' . $user['id']); ?>"
+                                    class="btn btn-primary">Edit</a>
+                                <a href="<?php echo base_url('Intigration/DeleteUser/' . $user['id']); ?>"
+                                    class="btn btn-danger">Delete</a>
                             </td>
                         </tr>
                     <?php } ?>
@@ -46,6 +48,12 @@
             </tbody>
         </table>
     </div>
+
+    <?php if ($this->session->flashdata('success')) { ?>
+        <div class="alert alert-success">
+            <?php echo $this->session->flashdata('success'); ?>
+        </div>
+    <?php } ?>
 
     <!-- Bootstrap JS (Optional for advanced features like modals, dropdowns, etc.) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
