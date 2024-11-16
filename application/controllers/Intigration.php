@@ -121,10 +121,65 @@ class Intigration extends CI_Controller
 
     // Update Data From API Integration
 
-    public function UpdateDataById()
-    {
 
+    public function EditUserForm($id)
+    {
+        $data['user'] = $this->UpdateDataById($id);
+
+        $this->load->view('EditForm', $data);
     }
+
+    public function UpdateDataById($id)
+    {
+        $api_url = 'http://localhost/ApiCreation/Creation/GetUserById' . $id;
+
+        // Initialize cURL
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $api_url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+        // Execute cURL request
+        $response = curl_exec($ch);
+        $response_data = json_decode($response, true);
+
+        // print_r($response_data);die;
+
+        if ($response_data['status'] == 'success') {
+            $data = $response_data['data'];
+        } else {
+            $data = null;
+        }
+        curl_close($ch);
+
+        return $data;
+    }
+
+
+    public function UpdateUser()
+    {
+        $id = $this->input->post('id');
+        $api_url = 'http://localhost/DemoApi/index.php/UserController/UpdateUser/' . $id;
+        $postData = $this->input->post();
+
+        unset($postData['id']);
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $api_url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+        $response = curl_exec($ch);
+        $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $response_data = json_decode($response, true);
+
+        curl_close($ch);
+
+        if (isset($response_data['status']) && $response_data['status'] == 'success') {
+
+            redirect("NewApiController/index");
+        }
+    }
+
 
 }
 ?>
