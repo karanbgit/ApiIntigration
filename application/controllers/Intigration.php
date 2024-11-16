@@ -8,14 +8,15 @@ class Intigration extends CI_Controller
         parent::__construct();
     }
 
+    // load 1st function
     public function index()
     {
-
         $data['users'] = $this->GetUsers();  //Get data From Database and create Kay Users
         $this->load->view('ViewData', $data); //Load ViewData View file first (Table format data) and pass $data
     }
 
 
+    //Load Data View  in api integration
     public function AddData()
     {
         $this->load->view("AddData");
@@ -23,6 +24,7 @@ class Intigration extends CI_Controller
 
 
 
+    // Add Data to API integration from API
     public function AddUser()
     {
 
@@ -58,6 +60,7 @@ class Intigration extends CI_Controller
 
 
 
+    // Get Data from API integration
     public function GetUsers()
     {
 
@@ -86,7 +89,7 @@ class Intigration extends CI_Controller
     }
 
 
-
+    // Delete Data from API integration
     public function DeleteUser($id)
     {
 
@@ -112,6 +115,14 @@ class Intigration extends CI_Controller
         curl_close($ch);
 
         redirect("Intigration/index");
+
+    }
+
+
+    // Update Data From API Integration
+
+    public function UpdateDataById()
+    {
 
     }
 
