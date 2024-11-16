@@ -36,7 +36,7 @@
                             <td><?php echo $user['email'] ?></td>
                             <td><?php echo $user['contact'] ?></td>
                             <td>
-                                <a href="<?php echo base_url('Intigration/EditUserForm/' . $user['id']); ?>"
+                                <a href="<?php echo base_url('Intigration/EditUser/' . $user['id']); ?>"
                                     class="btn btn-primary">Edit</a>
                                 <a href="<?php echo base_url('Intigration/DeleteUser/' . $user['id']); ?>"
                                     class="btn btn-danger">Delete</a>

@@ -93,7 +93,7 @@ class Intigration extends CI_Controller
     public function DeleteUser($id)
     {
 
-        $api_url = 'http://localhost/ApiCreation/Creation//DeleteUserData/' . $id;
+        $api_url = 'http://localhost/ApiCreation/Creation/DeleteUserData/' . $id;
 
         // Initialize cURL
         $ch = curl_init();
@@ -122,16 +122,16 @@ class Intigration extends CI_Controller
     // Update Data From API Integration
 
 
-    public function EditUserForm($id)
+    public function EditUser($id)
     {
-        $data['user'] = $this->UpdateDataById($id);
-
+        $data['user'] = $this->GetUserById($id);
         $this->load->view('EditForm', $data);
     }
 
-    public function UpdateDataById($id)
+    public function GetUserById($id)
     {
-        $api_url = 'http://localhost/ApiCreation/Creation/GetUserById' . $id;
+
+        $api_url = 'http://localhost/ApiCreation/Creation/GetUserById/' . $id;
 
         // Initialize cURL
         $ch = curl_init();
@@ -155,11 +155,17 @@ class Intigration extends CI_Controller
     }
 
 
+
+
+
+    // Update User Function 
     public function UpdateUser()
     {
         $id = $this->input->post('id');
-        $api_url = 'http://localhost/DemoApi/index.php/UserController/UpdateUser/' . $id;
+        $api_url = 'http://localhost/ApiCreation/Creation/UpdateUser/' . $id;
         $postData = $this->input->post();
+
+        
 
         unset($postData['id']);
 
@@ -176,9 +182,10 @@ class Intigration extends CI_Controller
 
         if (isset($response_data['status']) && $response_data['status'] == 'success') {
 
-            redirect("NewApiController/index");
+            redirect("Intigration/index");
         }
     }
+
 
 
 }
