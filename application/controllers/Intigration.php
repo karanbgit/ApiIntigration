@@ -23,6 +23,36 @@ class Intigration extends CI_Controller
     }
 
 
+    // Get Data from API integration
+    public function GetUsers()
+    {
+
+        $api_url = 'http://localhost/ApiCreation/Creation/GetUserData';
+
+        // Initialize cURL
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $api_url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+        // Execute cURL request
+        $response = curl_exec($ch);
+        $response_data = json_decode($response, true);
+
+        // print_r($response_data);die;
+
+        if ($response_data['status'] == 'success') {
+            $data = $response_data['data'];
+        } else {
+            $data = null;
+        }
+        curl_close($ch);
+
+        return $data;
+
+    }
+
+
+
 
     // Add Data to API integration from API
     public function AddUser()
@@ -56,36 +86,6 @@ class Intigration extends CI_Controller
 
             redirect("Intigration/index");
         }
-    }
-
-
-
-    // Get Data from API integration
-    public function GetUsers()
-    {
-
-        $api_url = 'http://localhost/ApiCreation/Creation/GetUserData';
-
-        // Initialize cURL
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $api_url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
-        // Execute cURL request
-        $response = curl_exec($ch);
-        $response_data = json_decode($response, true);
-
-        // print_r($response_data);die;
-
-        if ($response_data['status'] == 'success') {
-            $data = $response_data['data'];
-        } else {
-            $data = null;
-        }
-        curl_close($ch);
-
-        return $data;
-
     }
 
 
@@ -165,7 +165,7 @@ class Intigration extends CI_Controller
         $api_url = 'http://localhost/ApiCreation/Creation/UpdateUser/' . $id;
         $postData = $this->input->post();
 
-        
+
 
         unset($postData['id']);
 
