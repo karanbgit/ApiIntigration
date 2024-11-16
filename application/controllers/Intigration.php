@@ -87,7 +87,6 @@ class Intigration extends CI_Controller
 
 
 
-
     public function DeleteUser($id)
     {
 
