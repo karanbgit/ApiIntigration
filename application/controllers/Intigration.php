@@ -62,13 +62,11 @@ class Intigration extends CI_Controller
         $postData = $this->input->post();
 
 
-        // $file = $_FILES['profilepic'];
+        $file = $_FILES['image'];
 
-        // if($file['name'] == ""){
-        //     $postData['profilepic'] = $postData['old_profile'];
-        // } else {
-        //     $postData = array_merge($postData, array('profilepic' => new CURLFile($file['tmp_name'], $file['type'], $file['name'])));
-        // }
+
+        $postData = array_merge($postData, array('image' => new CURLFile($file['tmp_name'], $file['type'], $file['name'])));
+
 
 
         $ch = curl_init();
@@ -166,8 +164,16 @@ class Intigration extends CI_Controller
         $postData = $this->input->post();
 
 
+        $file = $_FILES['image'];
 
-        unset($postData['id']);
+        if ($file['name'] == "") {
+            $postData['image'] = $postData['old_image'];
+        } else {
+            $postData = array_merge($postData, array('image' => new CURLFile($file['tmp_name'], $file['type'], $file['name'])));
+        }
+
+
+        unset($postData['id'], $postData['old_image']);
 
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $api_url);
@@ -177,6 +183,7 @@ class Intigration extends CI_Controller
         $response = curl_exec($ch);
         $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $response_data = json_decode($response, true);
+
 
         curl_close($ch);
 

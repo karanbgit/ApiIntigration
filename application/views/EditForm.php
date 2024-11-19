@@ -13,7 +13,7 @@
 
     <div class="container mt-5">
         <h2 class="mb-4">Edit Contact Form</h2>
-        <form action="<?php echo base_url('Intigration/UpdateUser'); ?>" method="post">
+        <form action="<?php echo base_url('Intigration/UpdateUser'); ?>" method="post" enctype="multipart/form-data">
             <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
@@ -26,6 +26,12 @@
             <div class="mb-3">
                 <label for="contact" class="form-label">Contact</label>
                 <input type="text" class="form-control" name="contact" value="<?php echo $user['contact'] ?>">
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">Image</label><br>
+                <span class="text-muted m-3"><?php echo $user['image'] ?></span>
+                <input type="hidden" name="old_image" value="<?php echo $user['image'] ?>">
+                <input type="file" class="form-control" name="image">
             </div>
             <button type="submit" class="btn btn-primary">Update</button>
         </form>

@@ -13,7 +13,7 @@
 
     <div class="container mt-5">
         <h2 class="mb-4">Contact Form</h2>
-        <form action="<?php echo base_url('Intigration/AddUser'); ?>" method="post">
+        <form action="<?php echo base_url('Intigration/AddUser'); ?>" method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
                 <input type="text" class="form-control" name="name" placeholder="Enter your name">
@@ -25,6 +25,10 @@
             <div class="mb-3">
                 <label for="contact" class="form-label">Contact</label>
                 <input type="text" class="form-control" name="contact" placeholder="Enter your contact number">
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">Upload Image</label>
+                <input type="file" class="form-control" name="image">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>

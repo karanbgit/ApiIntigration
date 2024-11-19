@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,9 +18,10 @@
             <thead class="table-dark">
                 <tr>
                     <th>Sr. No</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
+                    <th>Name</th>
                     <th>Email</th>
+                    <th>Contact</th>
+                    <th>Image</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -35,6 +37,8 @@
                             <td><?php echo $user['name'] ?></td>
                             <td><?php echo $user['email'] ?></td>
                             <td><?php echo $user['contact'] ?></td>
+                            <td><img class="image-fluid" src="<?php echo 'http://localhost/ApiCreation/uploads/' . $user['image'] ?>" alt="Image"
+                                style="width: 80px; height: 80px;"></td>
                             <td>
                                 <a href="<?php echo base_url('Intigration/EditUser/' . $user['id']); ?>"
                                     class="btn btn-primary">Edit</a>
